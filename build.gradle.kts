@@ -1,5 +1,6 @@
 plugins {
     id("application")
+    id("com.gradleup.shadow") version "9.0.0-beta4"
 }
 
 group = "io.github.pixeldev"
@@ -25,6 +26,15 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+tasks {
+    shadowJar {
+        archiveClassifier.set("")
+        manifest {
+            attributes["Main-Class"] = "io.github.pixeldev.integral.Bootstrap"
+        }
+    }
 }
 
 tasks.test {
